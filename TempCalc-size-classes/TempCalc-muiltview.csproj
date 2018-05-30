@@ -120,6 +120,7 @@
     <Compile Include="AboutController.designer.cs">
       <DependentUpon>AboutController.cs</DependentUpon>
     </Compile>
+    <Compile Include="TempModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

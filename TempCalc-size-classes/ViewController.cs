@@ -10,53 +10,64 @@ namespace TempCalcsizeclasses
         {
             // Note: this .ctor should not contain any initialization logic.
         }
-        
+
+
+        public bool Celsius
+        {
+            get;
+            set;
+        }
+
         private void compute(object sender, EventArgs args)
         {
-			//check for empty textfields so no errors occur
+            //check for empty textfields so no errors occur
             //when parsing
-			CheckEmpty();
+            CheckEmpty();
 
-			double temp = Double.Parse(FahrenheitField.Text);
-			double humidity = Double.Parse(HumidityField.Text);
-			int windspeed = (int)WindSlider.Value;
+            double temp = Double.Parse(FahrenheitField.Text);
+            double humidity = Double.Parse(HumidityField.Text);
+            int windspeed = (int)WindSlider.Value;
 
-			int result = HumiditySwitch.On ? (int)Math.Round(calculate.getHeatIndex(temp, humidity))
-						  : (int)Math.Round(calculate.getWindChill(temp, windspeed));
+            int result = HumiditySwitch.On ? (int)Math.Round(calculate.getHeatIndex(temp, humidity))
+                          : (int)Math.Round(calculate.getWindChill(temp, windspeed));
 
+            //if celsius is selected
+            if (Celsius)
+                result = (int)calculate.ToCelsius(result);
+                                  
+            if (HumiditySwitch.On)
+            {
+                ResultLabel.Text = String.Format("Result: {0} ", result);
 
-			if (HumiditySwitch.On)
-			{
-				ResultLabel.Text = String.Format("Result: {0} F", result);
+                //make sure not all of them are zero (save memory)
+                if (temp != 0 && windspeed != 0 && result != 0)
+                    CalculationHistoryController.AddData(String.Format("Temp: {0}, Humidity: {1}, Result: {2} ",
+                        temp, humidity, result), Celsius);
+            }
 
-				//make sure not all of them are zero (save memory)
-				if (!(temp == 0 && windspeed == 0 && result == 0))
-				CalculationHistoryController.AddData(String.Format("Temp: {0}, Humidity: {1}, Result: {2} F",
-			        temp, humidity, result));
-			}
+            else
+            {            
+                ResultLabel.Text = String.Format("Result: {0} ", result);
 
-			else
-			{            
-				ResultLabel.Text = String.Format("Result: {0} F", result);
+                //make sure not all of them are zero (save memory)
+                if(temp != 0 && windspeed != 0 && result != 0)
+                    CalculationHistoryController.AddData(String.Format("Temp: {0}, Wind speed: {1}, Result: {2} ",
+                        temp, windspeed, result), Celsius);
+            }
 
-				//make sure not all of them are zero (save memory)
-				if(!(temp == 0 && windspeed == 0 && result == 0))
-				CalculationHistoryController.AddData(String.Format("Temp: {0}, Wind speed: {1}, Result: {2} F",
-		   	        temp, windspeed, result));
-			}
 
         }
 
         //checks for empty textboxes so it can parse correctly
         //without throwing errors
-		private void CheckEmpty()
-		{
-			if (FahrenheitField.Text == String.Empty)
-			    FahrenheitField.Text = "0";
+        private void CheckEmpty()
+        {
+            if (FahrenheitField.Text == String.Empty)
+                FahrenheitField.Text = "0";
 
-			if (HumidityField.Text == String.Empty)
+            if (HumidityField.Text == String.Empty)
                 HumidityField.Text = "0";
-		}
+        }
 
         partial void switchActionSheet(UISwitch sender)
         {
@@ -67,7 +78,7 @@ namespace TempCalcsizeclasses
                 (action) =>
                 {
                     HumidityField.Enabled = HumiditySwitch.On;
-				    compute(sender, null);
+                    compute(sender, null);
                 });
 
 
@@ -75,7 +86,7 @@ namespace TempCalcsizeclasses
                 (action) =>
                 {
                     HumidityField.Enabled = HumiditySwitch.On = !HumiditySwitch.On;
-					compute(sender, null);
+                    compute(sender, null);
                 });
 
             controller.AddAction(yesAction);
@@ -95,6 +106,10 @@ namespace TempCalcsizeclasses
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
+            //set up picker
+            var pickerModel = new TempModel(this);
+            TPicker.Model = pickerModel;
+
             //dismiss the keyboard on background touch
             View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
             {
@@ -103,9 +118,9 @@ namespace TempCalcsizeclasses
             }));
 
             //after editing, compute 
-			HumidityField.EditingDidEnd += compute;
-			FahrenheitField.EditingDidEnd += compute;
-			HumiditySwitch.ValueChanged += compute;
+            HumidityField.EditingDidEnd += compute;
+            FahrenheitField.EditingDidEnd += compute;
+            HumiditySwitch.ValueChanged += compute;
 
             //when slider value is changed, update UI
             WindSlider.ValueChanged += (sender, e) =>
@@ -115,6 +130,8 @@ namespace TempCalcsizeclasses
               
                 compute(sender, e);
             };
+
+
         }
 
        

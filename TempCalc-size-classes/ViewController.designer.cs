@@ -35,6 +35,10 @@ namespace TempCalcsizeclasses
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIPickerView TPicker { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UISlider WindSlider { get; set; }
 
         [Outlet]
@@ -70,6 +74,11 @@ namespace TempCalcsizeclasses
             if (ResultLabel != null) {
                 ResultLabel.Dispose ();
                 ResultLabel = null;
+            }
+
+            if (TPicker != null) {
+                TPicker.Dispose ();
+                TPicker = null;
             }
 
             if (WindSlider != null) {

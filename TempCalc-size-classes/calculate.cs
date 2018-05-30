@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 namespace TempCalcsizeclasses
 {
     public class calculate
@@ -49,6 +50,14 @@ namespace TempCalcsizeclasses
 				index += ((humidity - 85) / 10) * ((87 - fTemp) / 5);         
 
             return index;
+        }
+
+        public static double ToCelsius(int temp)
+        {
+            double result = (temp - 32) * 5 / 9;
+            Debug.WriteLine(result);
+            return result;
+
         }
     }
 }
