@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="TempCalc-size-classes/calculate.cs">
     <Files>
       <File FileName="TempCalc-size-classes/Main.storyboard" />
-      <File FileName="TempCalc-size-classes/ViewController.cs" Line="36" Column="26" />
-      <File FileName="TempCalc-size-classes/CalculationHistoryController.cs" Line="14" Column="10" />
+      <File FileName="TempCalc-size-classes/ViewController.cs" Line="37" Column="35" />
+      <File FileName="TempCalc-size-classes/CalculationHistoryController.cs" Line="112" Column="3" />
       <File FileName="TempCalc-size-classes/TempModel.cs" Line="30" Column="17" />
-      <File FileName="TempCalc-size-classes/calculate.cs" Line="23" Column="21" />
+      <File FileName="TempCalc-size-classes/calculate.cs" Line="57" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
@@ -13,6 +13,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.TempCalc-muiltview PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.BA233043-FC83-4F0E-B5E6-8D64744341CE" />
+  <MonoDevelop.Ide.ItemProperties.TempCalc-muiltview PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D9398E09-61FE-47F4-8123-4286E2545735" />
   <MultiItemStartupConfigurations />
 </Properties>

@@ -131,7 +131,6 @@ namespace TempCalcsizeclasses
                 compute(sender, e);
             };
 
-
         }
 
        

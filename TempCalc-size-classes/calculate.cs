@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 namespace TempCalcsizeclasses
 {
     public class calculate
@@ -52,12 +51,6 @@ namespace TempCalcsizeclasses
             return index;
         }
 
-        public static double ToCelsius(int temp)
-        {
-            double result = (temp - 32) * 5 / 9;
-            Debug.WriteLine(result);
-            return result;
-
-        }
+        public static double ToCelsius(int temp) => (temp - 32) * 5 / 9;
     }
 }
